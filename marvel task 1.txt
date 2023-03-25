@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>student calculate</title>
+	
+</head>
+
+<style>
+    body{
+        background-color: rgb(165, 221, 221);
+    }
+    .container{
+        font-size: 2rem;
+        text-align: center;
+    }
+</style>
+
+<body>
+	
+	<div class="container">
+	<h1>Student grade calculator</h1>
+	<div class="screen-body-item">
+		<div class="app">
+            <div class="form-group">
+                <input
+                type="text"
+                class="form-control"
+                placeholder="NAME"
+                id="name"
+                />
+            </div>
+		<div class="form-group">
+			
+			<input
+			type="text"
+			class="form-control"
+			placeholder="CHEMISTRY"
+			id="chemistry"
+			/>
+		</div>
+		
+		<div class="form-group">
+			<input
+			type="text"
+			class="form-control"
+			placeholder="MATHS"
+			id="maths"
+			/>
+		</div>
+		<div class="form-group">
+			<input
+			type="text"
+			class="form-control"
+			placeholder="PHYSICS"
+			id="phy"
+			/>
+		</div>
+		<div>
+			<input
+			type="button"
+			value="Add"
+			class="form-button"
+			onclick="calculate()"
+			/>
+		</div>
+		</div>
+	</div>
+	
+	<div class="form-group showdata">
+		<p id="showdata"></p>
+	</div>
+    <div>
+        <input type="button" value="Sort" class="form-button" onclick="sort()">
+	</div>
+	
+	<script>
+        const calculate = () => {
+
+let list = [];
+let chemistry = document.querySelector("#chemistry").value;
+let name = document.querySelector("#name").value;
+let maths = document.querySelector("#maths").value;
+let phy = document.querySelector("#phy").value;
+let grades = "";
+
+let totalgrades =
+    parseFloat(chemistry) +
+    parseFloat(maths) +
+    parseFloat(phy);
+
+
+let percentage = (totalgrades / 400) * 100;
+
+const para = document.createElement("li");
+const node = document.createTextNode(`${percentage} ${totalgrades} ${name}`);
+para.appendChild(node);
+const element = document.getElementById("showdata");
+element.appendChild(para);
+
+
+};
+
+const sort = () => {
+
+    var list, i, run, li, stop;
+
+    list = document.getElementById("showdata");
+
+    run = true;
+
+    while (run) {
+        run = false;
+        li = list.getElementsByTagName("li");
+       
+        for (i = 0; i < (li.length - 1); i++) {
+            stop = false;
+            if (li[i].innerHTML.toLowerCase() > 
+                li[i + 1].innerHTML.toLowerCase()) {
+                stop = true;
+                break;
+            }
+        }
+
+        if (stop) {
+            li[i].parentNode.insertBefore(
+                    li[i + 1], li[i]);
+
+            run = true;
+        }
+    }
+}
+    </script>
+</body>
+</html>
